@@ -27,7 +27,7 @@ class InformesVentana(QWidget):
             if not os.path.exists(ruta_informes):
                 os.makedirs(ruta_informes)
 
-            tipo_informe = "Clientes"
+            tipo_informe = "Cliente"
             fichero_entrada = os.path.join(ruta_informes, f"{tipo_informe}.jrxml")
             fichero_salida = os.path.join(ruta_informes, tipo_informe)
 

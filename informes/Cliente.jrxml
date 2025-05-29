@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 6.20.6  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Informe_AlbaranCliente" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a009aca0-a1b4-4ab9-bdff-f6a244e03d34">
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="479"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="521"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="database_jardineria"/>
+	<queryString>
+		<![CDATA[select concat(nombre, " ", apellido1, " ", apellido2) as Empleado, F2.nombre_cliente as Cliente, count(F3.codigo_pedido) as Pedidos, sum(F4.cantidad * F4.precio_unidad) as Coste   from empleado F1, cliente F2, pedido F3, detalle_pedido F4 where F1.codigo_empleado=F2.codigo_empleado_rep_ventas and F2.codigo_cliente=F3.codigo_cliente and F3.codigo_pedido=F4.codigo_pedido group by Empleado, Cliente ;]]>
+	</queryString>
+	<field name="Empleado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="Empleado"/>
+		<property name="com.jaspersoft.studio.field.label" value="Empleado"/>
+	</field>
+	<field name="Cliente" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre_cliente"/>
+		<property name="com.jaspersoft.studio.field.label" value="Cliente"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="Pedidos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="Pedidos"/>
+		<property name="com.jaspersoft.studio.field.label" value="Pedidos"/>
+	</field>
+	<field name="Coste" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="Coste"/>
+		<property name="com.jaspersoft.studio.field.label" value="Coste"/>
+	</field>
+	<variable name="numeroLinea" class="java.lang.String"/>
+	<variable name="TotalPedidos" class="java.lang.Integer" resetType="Group" resetGroup="Datos_Group" calculation="Sum">
+		<variableExpression><![CDATA[$F{Pedidos}]]></variableExpression>
+	</variable>
+	<variable name="TotalCoste" class="java.lang.Double" resetType="Group" resetGroup="Datos_Group" calculation="Sum">
+		<variableExpression><![CDATA[$F{Coste}]]></variableExpression>
+	</variable>
+	<group name="Datos_Group">
+		<groupExpression><![CDATA[$F{Empleado}]]></groupExpression>
+		<groupHeader>
+			<band height="90">
+				<textField>
+					<reportElement x="4" y="10" width="180" height="20" forecolor="#FC221E" uuid="7e9ced29-047f-4e1e-a39a-57cd3ab088e2"/>
+					<textElement>
+						<font size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Empleado: "+$F{Empleado}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="4" y="40" width="170" height="20" uuid="a7d0444e-761a-4a6b-a7a3-c80a028294a4"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Información de clientes:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="70" width="60" height="20" uuid="d501394d-26a6-4637-9151-1447977a96dc"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Nº]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="100" y="70" width="130" height="20" uuid="69f98c3d-fb7a-48eb-8b41-b2053dd4feb1"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cliente]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="360" y="70" width="70" height="20" uuid="43c50263-777a-440f-989d-50e3f1a1bc08"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Pedidos]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="480" y="70" width="66" height="20" uuid="bc5bcab9-f109-4bde-b7c1-23044b6053cc"/>
+					<textElement>
+						<font size="12" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total (€)]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<textField>
+					<reportElement x="4" y="0" width="541" height="19" uuid="6a024ad8-9c3b-4449-8514-994006f84482"/>
+					<textElement textAlignment="Center">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["numero de pedidos: "+$V{TotalPedidos} +" Precio total: "+$V{TotalCoste} + " €"]]></textFieldExpression>
+				</textField>
+				<line direction="BottomUp">
+					<reportElement x="1" y="19" width="552" height="1" uuid="37f575bb-40d7-4470-9557-e36368b69343"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Clientes_Group">
+		<groupExpression><![CDATA[$F{Cliente}]]></groupExpression>
+		<groupHeader>
+			<band height="20" splitType="Immediate">
+				<textField>
+					<reportElement x="100" y="0" width="130" height="20" uuid="f20053ba-dcb2-4570-9b58-8f7f2351262f"/>
+					<textElement>
+						<font size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Cliente}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="360" y="0" width="70" height="20" uuid="e3d04165-bd66-4efc-9ebf-0796e34d3f3e"/>
+					<textElement textAlignment="Left">
+						<font size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Pedidos}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="481" y="0" width="64" height="20" uuid="e1b94f81-d811-4d92-ba21-96ec3e42a2c8"/>
+					<textElement textAlignment="Left">
+						<font size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Coste}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="10" y="0" width="60" height="20" uuid="dd379c75-3d43-49ef-a373-cebc267618af"/>
+					<textElement>
+						<font size="12" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{Datos_Group_COUNT}+1]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="132">
+			<image>
+				<reportElement x="9" y="12" width="100" height="100" uuid="d2d0afd4-93ea-4e38-a741-fa041d7162f1"/>
+				<imageExpression><![CDATA["https://content.gnoss.ws/crfp/imagenes/Documentos/imgsem/d1/d1f2/d1f20877-c357-46a6-8baf-f1dffbc34ba2/f6b3149b-d321-4f69-9de4-8eec0b8cf4d6.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="120" y="32" width="400" height="40" uuid="dbfcdecd-29cf-4558-82b6-8a74bdfa6517"/>
+				<textElement textAlignment="Center">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Muestra los clientes de un empleado, la cantidad de productos que han pedido y el coste total de estos]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="446" y="82" width="100" height="30" uuid="51748204-11f4-4eb4-b532-7abed59d355e"/>
+				<textElement textAlignment="Right">
+					<font size="9" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Documento generado: "+new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="280" y="0" width="100" height="20" forecolor="#4F4F4F" uuid="d0754905-08b7-4ce4-b455-e85825378e4b"/>
+				<textElement textAlignment="Left">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" de " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="100" height="20" forecolor="#4F4F4F" uuid="436b79c4-26c8-4720-9da4-5084f71bffd2"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
