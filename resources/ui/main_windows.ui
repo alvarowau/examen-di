@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <widget class="QWidget" name="page">
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QWidget" name="pagina_inicio" native="true">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <widget class="QLabel" name="label">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../images/images.qrc">:/images/brianda1.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>false</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="page_productos"/>
+      <widget class="QWidget" name="page_custeion2"/>
+      <widget class="QWidget" name="page_custion3"/>
+      <widget class="QWidget" name="page_conexion"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuCuestion1">
+    <property name="title">
+     <string>Cuestion1</string>
+    </property>
+    <addaction name="actionConexi_n"/>
+    <addaction name="actionProductos"/>
+    <addaction name="actionSalir"/>
+   </widget>
+   <widget class="QMenu" name="menuCuestion2">
+    <property name="title">
+     <string>Cuestion2</string>
+    </property>
+    <addaction name="actioncuestion2"/>
+   </widget>
+   <widget class="QMenu" name="menuCuestion3">
+    <property name="title">
+     <string>Cuestion3</string>
+    </property>
+    <addaction name="actioninformes"/>
+   </widget>
+   <widget class="QMenu" name="menuInicio">
+    <property name="title">
+     <string>Inicio</string>
+    </property>
+    <addaction name="actionInicio"/>
+   </widget>
+   <addaction name="menuCuestion1"/>
+   <addaction name="menuCuestion2"/>
+   <addaction name="menuCuestion3"/>
+   <addaction name="menuInicio"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionConexi_n">
+   <property name="text">
+    <string>Conexión</string>
+   </property>
+  </action>
+  <action name="actionProductos">
+   <property name="text">
+    <string>Productos</string>
+   </property>
+  </action>
+  <action name="actionSalir">
+   <property name="text">
+    <string>Salir</string>
+   </property>
+  </action>
+  <action name="actionInicio">
+   <property name="text">
+    <string>Inicio</string>
+   </property>
+  </action>
+  <action name="actioncuestion2">
+   <property name="text">
+    <string>cuestion2</string>
+   </property>
+  </action>
+  <action name="actioninformes">
+   <property name="text">
+    <string>informes</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../images/images.qrc"/>
+ </resources>
+ <connections/>
+</ui>

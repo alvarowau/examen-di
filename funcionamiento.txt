@@ -1,0 +1,197 @@
+# Guía Súper Fácil para Arrancar tu Programa de Python (¡y Jugar sin Problemas!)
+
+Imagina que tu programa de Python es un juguete muy, muy, muy chulo y un poquito especial. Para que este juguete funcione bien y no se enfade, a veces necesita algunas cosas. ¡Pero no te preocupes! Aquí te lo explicamos todo con mucho cariño. ❤️
+
+---
+
+## Índice del Juego de Juguetes
+
+1.  ¿Quieres la misma Base de Datos que tengo yo? ¡Sí, por favor! (Docker Compose) 🤖 (BASE DE DATOS)
+2.  Cómo hacer que tu programa de Python revise su conexión (¡y arregle su reloj!) ⏱️ (TEST)
+3.  Preparando el juguete: El Traje Especial y los Accesorios 👕✨ (PREPARACIÓN DEL PROGRAMA)
+4.  ¡A Jugar! Arrancando tu Programa de Python ▶️ (EJECUTANDO PROGRAMA)
+
+---
+
+## 1. ¿Quieres la misma Base de Datos que tengo yo? ¡Sí, por favor! (Docker Compose) 🤖 (BASE DE DATOS)
+
+¡Esta es la PRIMERA opción y la más recomendable si quieres que la base de datos de tu programa sea EXACTAMENTE igual a la mía! Así, los dos tendréis el mismo mapa para la base de datos. 🗺️🤝
+
+Docker Compose es como tener un equipo de robots muy obedientes que te montan una pieza muy importante del juguete: la Base de Datos (MySQL). La Base de Datos es el lugar donde guardamos todos los datos del juguete: los productos, los clientes, etc. 📦✨
+
+Imagina que Docker Compose es como un director de orquesta para robots. Tiene un planito muy detallado (docker-compose.yml) que le dice cómo montar un 'cubo' especial: la Base de Datos (MySQL).
+
+En ese planito, ya le hemos dicho al robot cómo poner el reloj de la base de datos en la hora correcta (+02:00) para que no se líe el programa con ese error molesto de CEST que nos ha salido. ¡Esto es vital para que todo funcione bien! ⏰✅
+
+Y lo mejor es que esta Base de Datos va a vivir en una 'puerta' especial de tu ordenador que se llama puerto 3307. ¡Es como su propia casa! 🏠🥳 Así, tu programa Python la podrá encontrar sin problemas.
+
+### ¿Por qué es tan bueno usar este robot Docker Compose? ¡Los problemas que soluciona! 😠➡️😄
+
+Usar este robot es muy buena idea, aunque no es obligatorio si ya tienes una base de datos funcionando. ¡Pero si no lo usas, podrían aparecer estos problemas molestos!
+
+* **Problema del "reloj loco" (CEST)** 😠: Si tu base de datos tiene un reloj confuso o no entiende la hora (ese CEST que a veces sale), ¡tu programa de Python se enfadará y no te dejará hacer los informes! 😡 ¡Con el robot Docker Compose, el reloj ya está puesto en la hora correcta (+02:00)! ¡Problema resuelto! 😄
+* **"Mi base de datos no es como la tuya"** 🙁: Si armas la base de datos de otra forma, puede que los datos no sean los mismos, ¡o que falte algo! Con el robot Docker Compose, él arma una base de datos igualita a la mía, ¡con el mismo mapa de datos! 🗺️🤝 Así evitamos sorpresas. 👍
+* **"¡No encuentro la Base de Datos!"** 😫: A veces, la base de datos se esconde. Con el robot Docker Compose, él la pone en un lugar que tu programa siempre conoce (el puerto 3307), ¡así la encuentra siempre! 🔎🥳
+
+### Cómo montarlo (¡es fácil!): 🛠️
+
+1.  **Abre la ventanita (Terminal o Consola)** en la **carpeta principal de tu proyecto** (donde está el archivo docker-compose.yml).
+2.  **Primero, dile al robot que construya o prepare todas las piezas:**
+    ```bash
+    docker-compose build
+    ```
+    * **¿Dice "Building 1.1s (7/7) done"?** 😊 ¡Perfecto! El robot construyó todo bien.
+    * **¿Te dice "not found" como para init.sql"?** 😠 ¡Rayos! Significa que el robot no encontró un archivo importante. ¡Asegúrate de que **init.sql** esté en la misma carpeta que tu **Dockerfile**! Es como si el robot busca un tornillo y no lo encuentra en su caja.
+3.  **Después de construir, dile al robot que ponga todo en marcha:**
+    ```bash
+    docker-compose up -d
+    ```
+    * **¿Dice "Creating ... Done" y luego "Up (healthy)"?** 🥳 ¡Felicidades! Tu robot ha montado la base de datos, ¡y su reloj funciona perfecto en el puerto **3307**!
+    * **¿Ves errores aquí, como que no se puede conectar a la base de datos o lo del CEST?** 😤 Si aun así te sale el CEST, ¡no te desesperes! Significa que el robot necesita una última revisión en el **docker-compose.yml** para asegurarse de que el reloj se configure bien (**+02:00**). ¡Tú puedes con esto! 💪
+
+---
+
+## 2. Cómo hacer que tu programa de Python revise su conexión (¡y arregle su reloj!) ⏱️ (TEST)
+
+Imagina que tu programa de Python es un juguete muy listo, y tiene un cable especial para conectar a una caja mágica de datos (la base de datos). A veces, necesitamos asegurarnos de que ese cable funciona bien. ¡Y también de que el reloj de la caja mágica está en la hora correcta! ⏰✅
+
+Para esto, tenemos un **pequeño ayudante** que se llama **run_doctests.py**. ¡Lo hemos dejado en la carpeta principal de tu juguete, para que sea fácil de encontrar! 📂
+
+### ¿Qué hace run_doctests.py? 🤔
+
+Este ayudante hace algo muy sencillo:
+1.  **Revisa el cable:** Intenta conectar a la caja mágica de datos.
+2.  **Dice si funcionó o no:** Te dirá con un mensaje grande si el cable está bien o si hay algún problema. 🎉😥
+
+¡Es como un "probador de cable" súper rápido!
+
+### Paso 1: ¿Tu "caja mágica de datos" es la misma que tengo yo? 📦
+
+¡Esto es muy importante! Si quieres que la "caja mágica de datos" (la base de datos) sea EXACTAMENTE igual a la mía, con el reloj bien puesto y todo, tienes que usar Docker Compose (¡los robots que la montan!).
+
+* **Si SÍ usas Docker Compose** (¡y lo tienes montado como te expliqué con docker-compose up -d!): ¡Genial! Los robots ya dejaron la caja mágica lista en la "puerta" **3307** con el reloj perfecto. ¡No tienes que cambiar nada en el ayudante **run_doctests.py**! Es como si ya viniera con la dirección preescrita. 🥳
+* **Si NO usas Docker Compose** (¡o si tu caja mágica de datos está en otro sitio o tiene otra contraseña!): ¡No pasa nada! 😊 Pero necesitamos decirle al ayudante **run_doctests.py** dónde está tu caja mágica y cómo es su contraseña. ¡Es como cambiar la dirección en su mapa! 🗺️
+
+### Paso 2: ¿Cómo le digo al ayudante run_doctests.py dónde está mi "caja mágica"? 📝
+
+Si tu "caja mágica de datos" no es la de Docker Compose, o tiene otra "dirección", ¡tenemos que cambiar una línea dentro del archivo **run_doctests.py**!
+
+1.  **Abre el archivo run_doctests.py** (está en la carpeta principal de tu juguete).
+2.  **Busca esta línea:**
+    ```python
+    DBConfig.set_config({'db': 'jardineria', 'user': 'root', 'psw': 'root', 'host': 'localhost', 'port': 3307})
+    ```
+3.  **¡Cambia los valores para que coincidan con tu propia "caja mágica"!**
+    * `'db': 'jardineria'` : **Cambia 'jardineria'** por el nombre de **TU** base de datos.
+    * `'user': 'root'` : **Cambia 'root'** por el **nombre de usuario** de tu base de datos.
+    * `'psw': 'root'` : **Cambia 'root'** por la **contraseña** de tu base de datos. ¡Muy importante que sea la correcta!
+    * `'host': 'localhost'` : Esto es la "dirección" de tu base de datos. Si está en tu mismo ordenador, localhost suele estar bien. Si está en otro sitio, ¡tendrás que poner esa dirección!
+    * `'port': 3307` : Esto es la "puerta" de tu base de datos. Si no usas Docker Compose, a veces es 3306, o podría ser otra. ¡Pon la tuya!
+
+    **Ejemplo (¡NO COPIES ESTO SI NO SON TUS VALORES!):**
+    Si tu base de datos se llama mi_tienda, tu usuario es admin_db, tu contraseña es secreta123 y el puerto es 3306, la línea quedaría así:
+    ```python
+    DBConfig.set_config({'db': 'mi_tienda', 'user': 'admin_db', 'psw': 'secreta123', 'host': 'localhost', 'port': 3306})
+    ```
+    ¡Después de cambiarlo, guarda el archivo! 💾
+
+### Paso 3: ¡Vamos a ejecutar el ayudante run_doctests.py! ▶️
+
+¡Ahora que todo está listo, es hora de ver si el cable de tu juguete funciona!
+
+1.  **Asegúrate de que tu "caja mágica de datos" (la base de datos) esté encendida y funcionando.** Si usas Docker Compose, ve a la carpeta donde tienes docker-compose.yml y ejecuta `docker-compose up -d`. ¡Verás `Up (healthy)` si todo va bien! 🥳
+2.  **Abre la ventanita negra (Terminal o Consola).**
+3.  **Ve a la carpeta principal de tu juguete.** Como hemos movido run_doctests.py a la raíz, no hace falta que vayas a la carpeta tests. Solo ve a la carpeta donde está run_doctests.py y main.py.
+    * Por ejemplo: `cd Documentos/python/examen-di`
+4.  **¡Ejecuta el ayudante!**
+    ```bash
+    python run_doctests.py
+    ```
+
+### ¿Qué verás cuando el ayudante termine? 🧐
+
+* **Si ves muchos ok y un mensaje como "¡Todos los X Doctests PASARON con éxito! 🎉"**:
+    * ¡¡SÍIIIIII!! 😄 El cable de tu juguete funciona perfecto, y la "caja mágica" está lista para que tu programa la use. ¡Lo lograste! 🏆
+* **Si ves mensajes de error o "Fallaron X de Y Doctests. 😥"**:
+    * ¡Oh no! 😥 No te preocupes. Significa que el ayudante encontró un problema al conectar. Revisa bien:
+        * ¿Está la "caja mágica de datos" encendida? (¡Usa `docker-compose ps` si usas Docker, o mira tu programa de base de datos!)
+        * ¿Cambiaste bien la línea en run_doctests.py con la dirección y contraseña correctas de tu caja mágica? ¡A veces un error de escritura es el culpable! 🐛
+        * ¿El reloj de tu base de datos está loco? (¡Ese error CEST!). Si usas Docker Compose, ¡el robot ya lo arregla! Si no, ese es un problema aparte que puede ser un poco más complicado.
+
+---
+
+## 3. Preparando el juguete: El Traje Especial y los Accesorios 👕✨ (PREPARACIÓN DEL PROGRAMA)
+
+Ahora que tenemos la base de datos lista (¡o si no la quieres igual que la mía, no pasa nada!), vamos a preparar tu programa de Python.
+
+Tu juguete de Python es como un niño muy listo, pero que necesita su ropa y sus juguetes específicos.
+
+1.  **El Traje Especial (Entorno Virtual venv)**: Piensa en **venv** como un **traje mágico y limpio** solo para este juguete. Así, no se mezcla con la ropa de otros juguetes que tengas en tu ordenador y siempre tiene lo que necesita. ¡Es súper importante para que no se líe! 🤩
+2.  **Los Accesorios (el mapa requirements.txt)**: Hemos dejado un **mapa secreto** que se llama **requirements.txt**. En este mapa, ¡está la lista de **TODOS los accesorios** que tu juguete necesita para funcionar! Cosas como los botones **PySide6** para las ventanitas, o el conector **Jasper** para los informes. ¡Así no tienes que buscarlos uno a uno! 🗺️👍
+
+### ¿Cómo le ponemos el traje y los accesorios a nuestro juguete?
+
+¡No te agobies! Solo tienes que abrir la **ventanita negra (Terminal o Consola)** y decirle unas palabras mágicas.
+
+1.  **Ve a la carpeta de tu juguete:**
+    * Escribe `cd Documentos/python/examen-di` y pulsa Enter. (Acuérdate de que `cd` es como decir "ve a esta carpeta").
+    * Si te sale un mensaje raro o no va, ¡no pasa nada! 😕 Intenta revisar si escribiste bien el nombre de la carpeta o si está en otro sitio. ¡Tómate un respiro! 🧘‍♀️
+2.  **Ahora, vamos a ponerle el traje:**
+    * Escribe `python -m venv .venv` y pulsa Enter.
+    * Esto crea el traje mágico en una subcarpeta llamada **.venv**. ¡Qué bien! 😄
+3.  **Y ahora, le ponemos los accesorios con el mapa:**
+    * **Paso 3.1: ¡Activa el traje!** (Es como abrocharse los botones)
+        * En **Linux/macOS**: `source .venv/bin/activate`
+        * En **Windows (CMD)**: `.\.venv\Scripts\activate.bat`
+        * En **Windows (PowerShell)**: `.\.venv\Scripts\Activate.ps1`
+    * **Paso 3.2: ¡Usa el mapa para coger los accesorios!**
+        * Escribe `pip install -r requirements.txt` y pulsa Enter.
+    * Si ves muchas letras instalándose y al final no hay errores, ¡PERFECTO! 🎉 Ya tiene todo lo que necesita.
+    * Si te sale un error aquí, ¡no te enfades! 😭 Puede que el mapa tenga algo raro o que tu internet esté un poco lento. Vuelve a intentarlo o avísame.
+
+---
+
+## 4. ¡A Jugar! Arrancando tu Programa de Python ▶️ (EJECUTANDO PROGRAMA)
+
+Ahora que tu juguete tiene su traje y sus accesorios, ¡vamos a ver si funciona!
+
+### Intento 1: El botón mágico de tu caja de juguetes (VS Code) ✨
+
+La forma más fácil es usar el botón de "Play" en tu programa especial para escribir código.
+
+1.  **Abre tu programa principal** (**main.py**) en **VS Code**.
+2.  **Busca el botón verde de "Play" (un triángulo).** ▶️
+3.  **¡Púlsalo!**
+    * **¿Se abre tu programa con las ventanitas?** ¡¡SÍIIIIII!! 🥳 ¡Lo lograste a la primera!
+    * **¿Se queda pensando o sale un error en la parte de abajo?** 😕 ¡Demonios! Parece que este botón no funciona del todo bien para este juguete. ¡Pero no te preocupes! ¡Intentaremos de otra manera! ¡No te frustres! 🧘‍♂️
+
+### Intento 2: Hablando clarito con el ordenador (Desde la Terminal) 🗣️
+
+Si el botón mágico no funcionó, vamos a ser más directos. ¡Pero usando el traje especial que preparamos antes!
+
+1.  **Abre la ventanita negra (Terminal/Consola).**
+2.  **Ve a la carpeta de tu juguete** (si no lo estás ya): `cd Documentos/python/examen-di`
+3.  **¡Activa tu traje especial!** (¡Esto es muy importante para que use los accesorios!)
+    * En **Linux/macOS**: `source .venv/bin/activate`
+    * En **Windows (CMD)**: `.\.venv\Scripts\activate.bat`
+    * En **Windows (PowerShell)**: `.\.venv\Scripts\Activate.ps1`
+4.  **Ahora, dile a Python que inicie tu juguete:**
+    ```bash
+    python main.py
+    ```
+    y pulsa Enter.
+    * **¿Se abre tu programa con las ventanitas?** 😄 ¡Yupi! ¡Lo conseguiste!
+    * **¿Todavía no funciona? ¿Te da un error como "zona horaria CEST no reconocida"?** 😠 ¡UF! Este error es molesto. Significa que el reloj de la base de datos está en una hora que el programa no entiende bien. ¡Pero no te preocupes! Si usaste Docker Compose (Punto 1), ¡ese robot ya arregló el reloj de la base de datos! Si no lo usaste, entonces sí es un problema que tendremos que ver aparte. 🤯
+
+### Intento 3: Si la Forma 2 sigue sin funcionar (¡El truco del -m!) 🪄
+
+Si el `python main.py` te da problemas (y no es el error del reloj loco, porque ya lo hemos visto con Docker Compose), a veces Python es un poco tímido. ¡Podemos usar un truco para que encuentre el camino!
+
+1.  **Asegúrate de que estás en la carpeta de tu juguete y con el traje activado** (igual que en el Intento 2).
+2.  **Ahora, dile a Python que ejecute tu programa, pero con un "empujón" extra para que lo encuentre bien:**
+    ```bash
+    python -m main
+    ```
+    y pulsa Enter.
+    * **¿Se abre tu programa y funciona todo?** 🥳 ¡SÍ! ¡Este truco funcionó!
+    * **¿Todavía no funciona?** 😥 ¡Qué rollo! No te rindas. A veces los juguetes son muy cabezotas. ¡Pero con esto, ya tienes muchas herramientas para que funcione!
